@@ -2,7 +2,7 @@
 
 void menu();
 void executaFuncaoMenu(int opcao);
-void abreArquivoEntradaDados();
+char abreArquivoEntradaDados();
 void menu(){
   int opcao;
   printf("*******************************************************************\n");
@@ -17,10 +17,11 @@ void menu(){
 };
 
 void executaFuncaoMenu(int opcao){
+          char conteudo[1000];
           while(opcao < 5){
           switch (opcao) {
             case 1:
-                abreArquivoEntradaDados();
+                printf("%s",abreArquivoEntradaDados);
                 break;
             case 2:
                 printf("Iniciando a simulação\n");
@@ -40,16 +41,17 @@ void executaFuncaoMenu(int opcao){
 
 }
 
-void abreArquivoEntradaDados(){
+char abreArquivoEntradaDados(){
   FILE *fp;
   char c;
-  int num = 0;
+  char conteudoArquivo[1000];
+  int i = 0;
   fp = fopen("dadosEntrada.txt", "r");
   c = fgetc(fp);
-  while( (c=fgetc(fp))!= EOF )
-      if(c == '\n')
-        num++;
-
+  while( (c=fgetc(fp))!= EOF ){
+    conteudoArquivo[i] = c;
+    i++;
+}
   fclose(fp);
-  printf("O número de linhas do arquivo é: %d\n\n\n", num);
+  return conteudoArquivo;
 }
